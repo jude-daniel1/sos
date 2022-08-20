@@ -1,0 +1,168 @@
+import 'package:flutter/material.dart';
+import 'package:sos/utils/mycolor.dart';
+import 'package:sos/widgets/u_widgets/mydrawer.dart';
+
+// ignore: must_be_immutable
+class CompletedRequest extends StatefulWidget {
+  CompletedRequest({Key? key}) : super(key: key);
+
+  @override
+  _CompletedRequestState createState() => _CompletedRequestState();
+}
+
+class _CompletedRequestState extends State<CompletedRequest> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            image: DecorationImage(
+                image: AssetImage("assets/images/e.jpg"), fit: BoxFit.fill),
+          ),
+        ),
+        title: Text(
+          "completed",
+          style: TextStyle(
+              fontSize: 16, color: Colors.white, fontFamily: 'Brand-Regular'),
+        ),
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          image: DecorationImage(
+              image: AssetImage("assets/images/d.jpg"), fit: BoxFit.fill),
+        ),
+        child: widget.completed!.isEmpty
+            ? Center(
+                child: Text(
+                  "No completed request",
+                  style: TextStyle(
+                      color: textColor, fontFamily: fontFamily, fontSize: 20),
+                ),
+              )
+            : ListView.builder(
+                padding:
+                    EdgeInsets.only(top: 15, left: 10, right: 10, bottom: 10),
+                itemCount: widget.completed!.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Column(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: borderColor, width: 0.3),
+                        ),
+                        padding: EdgeInsets.only(left: 20, top: 5, right: 5),
+                        width: MediaQuery.of(context).size.width,
+                        height: 75,
+                        child: Column(children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Text(
+                                  "Request name : ",
+                                  style: TextStyle(
+                                      color: textColor,
+                                      fontFamily: fontFamily,
+                                      fontSize: 12),
+                                ),
+                              ),
+                              Expanded(
+                                child: Text(
+                                    "${widget.completed![index]['request_for']['title']} service",
+                                    style: TextStyle(
+                                        color: Colors.green,
+                                        fontSize: 12,
+                                        fontFamily: fontFamily)),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Text(
+                                  "Handyman's name : ",
+                                  style: TextStyle(
+                                      color: textColor,
+                                      fontFamily: fontFamily,
+                                      fontSize: 12),
+                                ),
+                              ),
+                              Expanded(
+                                child: Text(
+                                    "${widget.completed![index]['handyman']['name']}",
+                                    style: TextStyle(
+                                        color: Colors.green,
+                                        fontSize: 12,
+                                        fontFamily: fontFamily)),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Text(
+                                  "Handyman's phone no. : ",
+                                  style: TextStyle(
+                                      color: textColor,
+                                      fontFamily: fontFamily,
+                                      fontSize: 12),
+                                ),
+                              ),
+                              Expanded(
+                                child: Text(
+                                    "${widget.completed![index]['handyman']['phone']}",
+                                    style: TextStyle(
+                                        color: Colors.green,
+                                        fontSize: 12,
+                                        fontFamily: fontFamily)),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Text(
+                                  "Completed date : ",
+                                  style: TextStyle(
+                                      color: textColor,
+                                      fontFamily: fontFamily,
+                                      fontSize: 12),
+                                ),
+                              ),
+                              Expanded(
+                                child: Text(
+                                    "${widget.completed![index]['date']}",
+                                    style: TextStyle(
+                                        color: Colors.green,
+                                        fontSize: 12,
+                                        fontFamily: fontFamily)),
+                              )
+                            ],
+                          ),
+                        ]),
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: 3,
+                        color: borderColor,
+                      ),
+                      Divider(
+                        height: 15,
+                        color: Colors.transparent,
+                        thickness: 4,
+                      ),
+                    ],
+                  );
+                }),
+      ),
+      drawer: MyDrawer("Request"),
+    );
+  }
+}
